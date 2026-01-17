@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartMoney - Control de Gastos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="./assets/css/main.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#3B82F6',
+            'primary-dark': '#2563EB',
+            'primary-light': '#60A5FA',
+            secondary: '#10B981',
+            'secondary-dark': '#059669',
+            'secondary-light': '#34D399',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <!-- Navbar -->
+  <nav id="navbar" class="hidden bg-white shadow-sm border-b border-gray-200 fixed top-0 left-0 right-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center">
+          <h1 class="text-2xl font-bold text-primary">SmartMoney</h1>
+        </div>
+        <div class="hidden md:flex space-x-8">
+          <a href="#dashboard" class="nav-link text-gray-700 hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
+          <a href="#gastos" class="nav-link text-gray-700 hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">Gastos</a>
+          <a href="#presupuestos" class="nav-link text-gray-700 hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">Presupuestos</a>
+          <a href="#reportes" class="nav-link text-gray-700 hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">Reportes</a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <span id="user-name" class="text-sm text-gray-700 hidden md:block"></span>
+          <button id="logout-btn" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors">
+            Cerrar Sesión
+          </button>
+        </div>
+        <div class="md:hidden">
+          <button id="mobile-menu-btn" class="text-gray-700 hover:text-primary">
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+      <div class="px-2 pt-2 pb-3 space-y-1">
+        <a href="#dashboard" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Dashboard</a>
+        <a href="#gastos" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Gastos</a>
+        <a href="#presupuestos" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Presupuestos</a>
+        <a href="#reportes" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Reportes</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content Container -->
+  <div id="app" class="mt-16">
+    <!-- Pages will be loaded here dynamically -->
+  </div>
+
+  <!-- Loading Spinner -->
+  <div id="loading-spinner" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white p-6 rounded-lg shadow-xl">
+      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+      <p class="mt-4 text-gray-700 font-medium">Cargando...</p>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script type="module" src="./assets/js/app.js"></script>
+</body>
+</html>
