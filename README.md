@@ -1,263 +1,354 @@
-# SmartMoney Frontend
+# SmartMoney - Guía Completa de Usuario
 
-Frontend de la aplicación SmartMoney - Control Inteligente de Gastos Personales.
+## Introducción
 
-## Tecnologías
+SmartMoney es una aplicación web completa para el control inteligente de gastos personales. Te permite registrar, analizar y mejorar tus hábitos financieros de manera visual e intuitiva.
 
-- HTML5
-- CSS3 (Tailwind CSS via CDN)
-- JavaScript ES6+ (Vanilla JS - Módulos)
-- Chart.js para gráficos
-- Font Awesome para iconos
+---
 
-## Estructura del Proyecto
+## Características Principales
 
-```
-smartmoney-frontend/
-├── index.html
-├── assets/
-│   ├── css/
-│   │   └── main.css
-│   └── js/
-│       ├── app.js
-│       ├── router.js
-│       ├── config.js
-│       ├── api/
-│       │   ├── auth.api.js
-│       │   ├── gastos.api.js
-│       │   ├── categorias.api.js
-│       │   ├── dashboard.api.js
-│       │   ├── presupuestos.api.js
-│       │   └── reportes.api.js
-│       ├── pages/
-│       │   ├── auth/
-│       │   │   ├── login.page.js
-│       │   │   └── register.page.js
-│       │   ├── dashboard.page.js
-│       │   ├── gastos.page.js
-│       │   ├── presupuestos.page.js
-│       │   └── reportes.page.js
-│       └── utils/
-│           ├── storage.util.js
-│           ├── format.util.js
-│           └── validation.util.js
-└── README.md
-```
-
-## Configuración
-
-### 1. Configurar la URL del API
-
-Edita el archivo `assets/js/config.js` y cambia la URL del API:
-
-```javascript
-const CONFIG = {
-  API_URL: 'https://tu-api.onrender.com/api', // Tu URL de Render
-  // ...
-};
-```
-
-### 2. Servidor de Desarrollo Local
-
-Para probar localmente, necesitas un servidor HTTP simple. Opciones:
-
-**Opción A: VS Code Live Server**
-1. Instala la extensión "Live Server" en VS Code
-2. Click derecho en `index.html` > "Open with Live Server"
-
-**Opción B: Python HTTP Server**
-```bash
-# Python 3
-python -m http.server 5500
-
-# Luego abre http://localhost:5500
-```
-
-**Opción C: Node HTTP Server**
-```bash
-npx http-server -p 5500
-```
-
-### 3. CORS en Desarrollo
-
-Si estás probando localmente, asegúrate de que tu backend acepte requests desde `http://localhost:5500`:
-
-En Render, agrega la variable de entorno:
-```
-CORS_ORIGIN=http://localhost:5500
-```
-
-O para permitir todos los orígenes durante desarrollo:
-```
-CORS_ORIGIN=*
-```
-
-## Despliegue en Netlify
-
-### 1. Preparar el Proyecto
-
-1. Asegúrate de que la URL del API en `config.js` apunte a tu backend en Render
-2. Commit y push a GitHub
-
-### 2. Desplegar en Netlify
-
-**Método 1: Desde GitHub**
-
-1. Ve a [Netlify](https://www.netlify.com)
-2. Click en "Add new site" > "Import an existing project"
-3. Conecta tu repositorio de GitHub
-4. Configura:
-   - **Build command:** Dejar vacío
-   - **Publish directory:** `.` (punto)
-5. Click en "Deploy site"
-
-**Método 2: Drag and Drop**
-
-1. Ve a [Netlify](https://www.netlify.com)
-2. Arrastra la carpeta del proyecto directamente a Netlify
-3. Netlify lo desplegará automáticamente
-
-### 3. Configurar el Dominio
-
-1. Netlify te dará una URL como: `https://nombre-aleatorio.netlify.app`
-2. Puedes cambiar el nombre en "Site settings" > "Change site name"
-
-### 4. Actualizar CORS en el Backend
-
-Una vez que tengas tu URL de Netlify, actualiza la variable de entorno en Render:
-
-```
-CORS_ORIGIN=https://tu-app.netlify.app
-```
-
-## Características Implementadas
-
-### Autenticación
-- Registro de usuarios
-- Inicio de sesión
-- Cierre de sesión
-- Manejo de tokens JWT
-
-### Dashboard
-- Resumen de gastos del día y mes
+### 1. Dashboard Interactivo
+- Resumen de gastos del día y mes actual
 - Indicador de presupuesto usado
-- Gráfico circular de gastos por categoría
-- Gráfico de línea de gastos por día
-- Mensajes motivacionales dinámicos
+- Gráfico circular de distribución por categorías
+- Gráfico de línea de gastos diarios
+- Mensajes motivacionales basados en tu comportamiento financiero
 
-### Diseño
-- Mobile-first responsive
-- Interfaz limpia y profesional
-- Sin emojis
-- Paleta de colores consistente
-- Animaciones suaves
+### 2. Gestión de Gastos
+- Registro rápido de gastos (5 segundos)
+- Registro detallado con descripción y fecha
+- Filtros por categoría, fecha y método de pago
+- Edición y eliminación de gastos
+- Historial completo con paginación
 
-## Navegación
+### 3. Presupuestos Inteligentes
+- Crear presupuestos por categoría
+- Alertas visuales según porcentaje usado:
+  - Verde: < 60% (En control)
+  - Amarillo: 60-80% (Atención)
+  - Naranja: 80-95% (Cuidado)
+  - Rojo: > 95% (Límite excedido)
+- Seguimiento mensual
+- Visualización con barras de progreso
 
-La aplicación usa routing del lado del cliente con hash (#):
+### 4. Reportes Detallados
+- Análisis mensual completo
+- Comparación con mes anterior
+- Distribución por categorías
+- Recomendaciones personalizadas
+- Estadísticas de gasto promedio
 
-- `#login` - Página de inicio de sesión
-- `#register` - Página de registro
-- `#dashboard` - Dashboard principal
-- `#gastos` - Gestión de gastos (en desarrollo)
-- `#presupuestos` - Gestión de presupuestos (en desarrollo)
-- `#reportes` - Reportes mensuales (en desarrollo)
+### 5. Categorías Predeterminadas
+Al registrarte, obtienes automáticamente 8 categorías:
+- Comida
+- Transporte
+- Ocio
+- Gimnasio
+- Estudios
+- Salud
+- Servicios
+- Otros
 
-## Almacenamiento Local
+---
 
-La aplicación usa `localStorage` para:
-- Token de autenticación (`smartmoney_token`)
-- Datos del usuario (`smartmoney_user`)
+## Guía de Uso Paso a Paso
 
-## Próximos Pasos
+### Primer Uso
 
-Para completar el frontend, necesitas implementar las páginas:
+#### 1. Crear tu Cuenta
+1. Accede a la aplicación
+2. Click en "Regístrate aquí"
+3. Completa el formulario:
+   - Nombre completo
+   - Email
+   - Contraseña (mínimo 6 caracteres)
+4. Click en "Crear Cuenta"
 
-1. **Gastos** (`gastos.page.js`)
-   - Formulario para crear/editar gastos
-   - Lista de gastos con filtros
-   - Botón de gasto rápido
-   - Eliminación de gastos
+Las categorías predeterminadas se crearán automáticamente.
 
-2. **Presupuestos** (`presupuestos.page.js`)
-   - Crear presupuestos por categoría
-   - Visualización de presupuestos con barras de progreso
-   - Alertas visuales según porcentaje usado
+#### 2. Iniciar Sesión
+1. Ingresa tu email y contraseña
+2. Click en "Iniciar Sesión"
+3. Serás redirigido al Dashboard
 
-3. **Reportes** (`reportes.page.js`)
-   - Selector de mes/año
-   - Visualización de estadísticas
-   - Comparación con mes anterior
-   - Recomendaciones personalizadas
-   - Exportación a PDF/CSV
+---
+
+### Uso Diario
+
+#### Registrar un Gasto Rápido
+Ideal para cuando estás apurado:
+
+1. Click en "Gasto Rápido" (botón verde en la esquina)
+2. Ingresa el monto
+3. Selecciona la categoría
+4. Click en el método de pago (Efectivo, Tarjeta o Transferencia)
+5. Click en "Registrar Gasto"
+
+Se registrará con la fecha de hoy automáticamente.
+
+#### Registrar un Gasto Detallado
+Para gastos que quieres documentar mejor:
+
+1. Ve a la página "Gastos"
+2. Click en "Nuevo Gasto"
+3. Completa el formulario:
+   - Selecciona categoría
+   - Ingresa monto
+   - Agrega descripción (opcional pero recomendado)
+   - Selecciona método de pago
+   - Selecciona fecha (por defecto: hoy)
+4. Click en "Guardar"
+
+#### Editar o Eliminar un Gasto
+1. Ve a la página "Gastos"
+2. Busca el gasto en la lista
+3. Click en el ícono de lápiz para editar
+4. Click en el ícono de basura para eliminar
+
+---
+
+### Gestión de Presupuestos
+
+#### Crear un Presupuesto
+1. Ve a la página "Presupuestos"
+2. Click en "Nuevo Presupuesto"
+3. Completa el formulario:
+   - Selecciona categoría
+   - Ingresa monto límite (ej: 500.00)
+   - Selecciona periodo (Mensual o Semanal)
+   - Selecciona mes y año
+4. Click en "Guardar"
+
+#### Monitorear Presupuestos
+Los presupuestos te mostrarán:
+- Monto gastado hasta ahora
+- Monto restante
+- Porcentaje usado
+- Barra de progreso con colores
+- Mensaje según tu estado
+
+**Recomendación:** Crea presupuestos para tus categorías principales (Comida, Transporte, Ocio).
+
+---
+
+### Análisis con Reportes
+
+#### Generar un Reporte Mensual
+1. Ve a la página "Reportes"
+2. Selecciona mes y año
+3. Click en "Generar"
+
+El reporte te mostrará:
+- Total gastado en el mes
+- Promedio diario
+- Total de transacciones
+- Comparación con mes anterior
+- Distribución por categorías
+- Recomendaciones personalizadas
+
+---
+
+### Uso de Filtros
+
+En la página de Gastos puedes filtrar por:
+
+**Por Categoría:**
+- Selecciona una categoría específica
+- Ver solo gastos de esa categoría
+
+**Por Rango de Fechas:**
+- Selecciona fecha de inicio
+- Selecciona fecha de fin
+- Ver gastos en ese período
+
+**Por Método de Pago:**
+- Selecciona Efectivo, Tarjeta o Transferencia
+- Ver solo gastos con ese método
+
+**Combinar Filtros:**
+Puedes usar varios filtros a la vez, por ejemplo:
+- Categoría: Comida
+- Fecha: Última semana
+- Método: Tarjeta
+
+---
+
+## Tips y Mejores Prácticas
+
+### Para Control Efectivo
+
+1. **Registra diariamente**
+   - Usa el "Gasto Rápido" apenas gastes
+   - No dejes pasar más de 1 día sin registrar
+
+2. **Sé específico en las descripciones**
+   - En vez de "comida" escribe "almuerzo con amigos"
+   - Te ayudará a identificar patrones
+
+3. **Revisa tu Dashboard semanalmente**
+   - Verifica que no estés cerca de tus límites
+   - Lee los mensajes motivacionales
+
+4. **Crea presupuestos realistas**
+   - Empieza con montos generosos
+   - Ajusta según tu comportamiento real
+
+5. **Analiza tus reportes mensuales**
+   - Compara mes a mes
+   - Sigue las recomendaciones
+
+### Para Ahorrar Más
+
+1. **Establece presupuestos en categorías "peligrosas"**
+   - Ocio y entretenimiento
+   - Comidas fuera
+   - Compras impulsivas
+
+2. **Usa los mensajes motivacionales**
+   - Te dirán cuando vas bien
+   - Te alertarán cuando gastes de más
+
+3. **Presta atención a las alertas**
+   - Color amarillo = reduce gastos
+   - Color rojo = detente y evalúa
+
+4. **Revisa categorías con mayor gasto**
+   - En los reportes verás cuál es tu categoría problema
+   - Enfócate en reducir ahí
+
+---
+
+## Navegación Rápida
+
+### Desde el Menú Principal
+
+**Desktop:**
+- Dashboard - Resumen general
+- Gastos - Administrar gastos
+- Presupuestos - Control de límites
+- Reportes - Análisis mensual
+
+**Mobile:**
+- Click en el menú hamburguesa (☰)
+- Selecciona la página que necesites
+
+### Atajos Rápidos
+
+Desde el Dashboard:
+- "Nuevo Gasto" → Te lleva a página de Gastos
+- "Ver Presupuestos" → Te lleva a página de Presupuestos
+- "Ver Reportes" → Te lleva a página de Reportes
+
+---
+
+## Interpretación de Indicadores
+
+### Estados de Presupuesto
+
+**Verde (En control):**
+- Has usado menos del 60%
+- Vas muy bien
+- Sigue así
+
+**Azul (Atención):**
+- Has usado entre 60-80%
+- Estás usando una buena parte
+- Modera tus próximos gastos
+
+**Amarillo (Cuidado):**
+- Has usado entre 80-95%
+- Estás cerca de tu límite
+- Evita gastos innecesarios
+
+**Rojo (Crítico):**
+- Has superado el 95% o pasaste el límite
+- Detén gastos en esta categoría
+- Reevalúa tu presupuesto
+
+### Mensajes Motivacionales
+
+El sistema analiza:
+- Porcentaje de presupuesto usado
+- Tendencia vs mes anterior
+- Gastos bajos vs promedio
+
+Y te da mensajes como:
+- "Excelente control financiero este mes"
+- "Cuidado, estás cerca de tu límite mensual"
+- "Gastaste 15% menos que el mes pasado. Buen trabajo"
+
+---
 
 ## Solución de Problemas
 
-### Error: CORS Policy
+### No puedo iniciar sesión
+- Verifica tu email y contraseña
+- Asegúrate de tener conexión a internet
+- Si olvidaste tu contraseña, contacta al administrador
 
-Si ves este error en la consola:
-```
-Access to fetch at '...' from origin '...' has been blocked by CORS policy
-```
+### No veo mis gastos
+- Verifica que hayas iniciado sesión
+- Revisa los filtros (puede que estén activos)
+- Asegúrate de estar viendo el mes correcto
 
-Solución:
-- Verifica que `CORS_ORIGIN` en el backend incluya tu URL del frontend
-- Para desarrollo local, usa `http://localhost:5500` (sin la barra final)
-- Para producción, usa tu URL de Netlify completa
+### Los gráficos no cargan
+- Refresca la página (F5)
+- Verifica tu conexión a internet
+- Intenta en otro navegador
 
-### Error: Network Request Failed
+### No puedo crear un presupuesto
+- Verifica que no exista ya uno para esa categoría en ese mes
+- Asegúrate de ingresar un monto válido
+- Revisa que hayas seleccionado todos los campos
 
-Posibles causas:
-1. Backend no está corriendo
-2. URL incorrecta en `config.js`
-3. Problema de internet
+---
 
-### Dashboard no carga
+## Preguntas Frecuentes
 
-1. Abre la consola del navegador (F12)
-2. Verifica que el token esté guardado: `localStorage.getItem('smartmoney_token')`
-3. Si no hay token, cierra sesión y vuelve a iniciar sesión
+**¿Puedo usar la app en mi celular?**
+Sí, SmartMoney es totalmente responsive y funciona perfectamente en móviles.
 
-## Personalización
+**¿Mis datos están seguros?**
+Sí, usamos autenticación segura con tokens JWT y Row Level Security en la base de datos.
 
-### Cambiar Colores
+**¿Puedo crear mis propias categorías?**
+Actualmente tienes 8 categorías predeterminadas que cubren la mayoría de casos de uso.
 
-Edita `index.html` en la sección de configuración de Tailwind:
+**¿Puedo ver gastos de meses anteriores?**
+Sí, en la página de Reportes puedes seleccionar cualquier mes y año.
 
-```javascript
-tailwind.config = {
-  theme: {
-    extend: {
-      colors: {
-        primary: '#3B82F6',  // Tu color principal
-        secondary: '#10B981', // Tu color secundario
-      }
-    }
-  }
-}
-```
+**¿Hay límite de gastos que puedo registrar?**
+No, puedes registrar tantos gastos como necesites.
 
-### Cambiar Formato de Moneda
+**¿Puedo editar gastos antiguos?**
+Sí, en la página de Gastos puedes editar o eliminar cualquier gasto.
 
-Edita `format.util.js`:
+**¿Los presupuestos se renuevan automáticamente?**
+No, debes crear un presupuesto nuevo cada mes si quieres continuar con el control.
 
-```javascript
-formatCurrency(amount) {
-  return new Intl.NumberFormat('es-MX', {
-    style: 'currency',
-    currency: 'MXN'  // Cambia a USD, EUR, etc.
-  }).format(amount);
-}
-```
+**¿Puedo compartir mis gastos con otra persona?**
+Actualmente cada usuario tiene sus propios datos privados.
 
-## Contribuir
+---
 
-1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/NuevaFuncionalidad`)
-3. Commit tus cambios (`git commit -m 'Agregar nueva funcionalidad'`)
-4. Push a la rama (`git push origin feature/NuevaFuncionalidad`)
-5. Abre un Pull Request
+## Contacto y Soporte
 
-## Licencia
+Si tienes problemas, sugerencias o necesitas ayuda:
+- Reporta el problema detalladamente
+- Incluye capturas de pantalla si es posible
+- Describe los pasos que seguiste
 
-ISC
+---
+
+## Conclusión
+
+SmartMoney te ayuda a:
+- Tener visibilidad total de tus gastos
+- Establecer límites saludables
+- Desarrollar mejores hábitos financieros
+- Ahorrar más cada mes
+
+**Recuerda:** La clave del éxito financiero es la constancia. Registra tus gastos diariamente y revisa tu dashboard semanalmente.
+
+¡Buena suerte con tu control financiero!

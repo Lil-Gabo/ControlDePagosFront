@@ -5,6 +5,9 @@ import AuthAPI from './api/auth.api.js';
 import LoginPage from './pages/auth/login.page.js';
 import RegisterPage from './pages/auth/register.page.js';
 import DashboardPage from './pages/dashboard.page.js';
+import GastosPage from './pages/gastos.page.js';
+import PresupuestosPage from './pages/presupuestos.page.js';
+import ReportesPage from './pages/reportes.page.js';
 
 class App {
   constructor() {
@@ -20,9 +23,9 @@ class App {
     Router.register('login', () => LoginPage.render());
     Router.register('register', () => RegisterPage.render());
     Router.register('dashboard', () => DashboardPage.render());
-    Router.register('gastos', () => this.showComingSoon('Gastos'));
-    Router.register('presupuestos', () => this.showComingSoon('Presupuestos'));
-    Router.register('reportes', () => this.showComingSoon('Reportes'));
+    Router.register('gastos', () => GastosPage.render());
+    Router.register('presupuestos', () => PresupuestosPage.render());
+    Router.register('reportes', () => ReportesPage.render());
   }
 
   setupEventListeners() {
